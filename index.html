@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StyleSense – Generative AI Fashion Assistant</title>
+  <link rel="stylesheet" href="styles-base.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="logo-orb"></div>
+        <span class="logo-text">Style<span class="logo-accent">Sense</span></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#analyze">Analyze</a></li>
+        <li><a href="#face-analysis">Face AI</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#chatbot">Assistant</a></li>
+      </ul>
+      <button class="nav-cta" onclick="scrollToSection('analyze')">Launch App</button>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <!-- ═══ SECTIONS (loaded inline) ═══ -->
+  <div id="hero">
+<section class="hero" id="hero-section">
+  <div class="parallax-layer layer-1" data-speed="0.1"></div>
+  <div class="parallax-layer layer-2" data-speed="0.2"></div>
+  <div class="hero-grid"></div>
+  <div class="scan-line"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span><span>AI-Powered Fashion Intelligence</span></div>
+    <h1 class="hero-title">
+      <span class="title-line">The Future of</span>
+      <span class="title-line gradient-text">Fashion is</span>
+      <span class="title-line">Generative.</span>
+    </h1>
+    <p class="hero-sub">StyleSense reads your face, understands your vibe, and generates outfits tailored to your unique identity — powered by Groq LLaMA, Gemini Vision &amp; Hugging Face.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('analyze').scrollIntoView({behavior:'smooth'})">
+        <span class="btn-glow"></span>Start Style Scan
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="btn-ghost" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        See Features
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-num" data-target="2400000">0</span><span class="stat-label">Styles Generated</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-num">98.7%</span><span class="stat-label">Accuracy Rate</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-num" data-target="150000">0</span><span class="stat-label">Active Users</span></div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="mannequin-container">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="scan-grid">
+        <div class="grid-h"></div><div class="grid-h"></div><div class="grid-h"></div>
+        <div class="grid-v"></div><div class="grid-v"></div><div class="grid-v"></div>
+      </div>
+      <svg class="figure-svg" viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Head -->
+        <ellipse cx="150" cy="90" rx="65" ry="75" stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.9"/>
+        <!-- Neck -->
+        <line x1="130" y1="162" x2="125" y2="185" stroke="#3B82F6" stroke-width="1.5" opacity="0.7"/>
+        <line x1="170" y1="162" x2="175" y2="185" stroke="#3B82F6" stroke-width="1.5" opacity="0.7"/>
+        <!-- Shoulders -->
+        <path d="M125 185 Q80 190 60 210" stroke="#3B82F6" stroke-width="1.5" opacity="0.8"/>
+        <path d="M175 185 Q220 190 240 210" stroke="#3B82F6" stroke-width="1.5" opacity="0.8"/>
+        <!-- Torso -->
+        <path d="M60 210 L55 340 Q150 360 245 340 L240 210" stroke="#3B82F6" stroke-width="1.5" opacity="0.8"/>
+        <!-- Arms -->
+        <path d="M60 210 L40 310 L50 315" stroke="#3B82F6" stroke-width="1.5" opacity="0.6"/>
+        <path d="M240 210 L260 310 L250 315" stroke="#3B82F6" stroke-width="1.5" opacity="0.6"/>
+        <!-- Legs -->
+        <line x1="115" y1="340" x2="105" y2="490" stroke="#3B82F6" stroke-width="1.5" opacity="0.6"/>
+        <line x1="185" y1="340" x2="195" y2="490" stroke="#3B82F6" stroke-width="1.5" opacity="0.6"/>
+        <!-- Face features -->
+        <circle cx="130" cy="80" r="4" fill="#60A5FA" opacity="0.9"/>
+        <circle cx="170" cy="80" r="4" fill="#60A5FA" opacity="0.9"/>
+        <ellipse cx="150" cy="100" rx="8" ry="5" stroke="#60A5FA" stroke-width="1" opacity="0.7"/>
+        <path d="M135 115 Q150 125 165 115" stroke="#60A5FA" stroke-width="1.5" opacity="0.8"/>
+        <!-- Measurement lines -->
+        <line x1="20" y1="90" x2="85" y2="90" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+        <line x1="215" y1="90" x2="280" y2="90" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+        <circle cx="85" cy="90" r="3" fill="#3B82F6"/>
+        <circle cx="215" cy="90" r="3" fill="#3B82F6"/>
+        <line x1="20" y1="185" x2="55" y2="185" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+        <line x1="245" y1="185" x2="280" y2="185" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+        <circle cx="55" cy="185" r="3" fill="#3B82F6"/>
+        <circle cx="245" cy="185" r="3" fill="#3B82F6"/>
+        <line x1="20" y1="340" x2="55" y2="340" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+        <line x1="245" y1="340" x2="280" y2="340" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+        <circle cx="55" cy="340" r="3" fill="#3B82F6"/>
+        <circle cx="245" cy="340" r="3" fill="#3B82F6"/>
+      </svg>
+      <div class="holo-shimmer"></div>
+      <div class="scan-beam"></div>
+    </div>
+
+    <!-- Floating tech labels -->
+    <div class="tech-label label-1">
+      <div class="label-dot"></div>
+      <div class="label-line"></div>
+      <div class="label-card"><span class="label-icon">◈</span><span>AI Skin Tone Detection</span></div>
+    </div>
+    <div class="tech-label label-2">
+      <div class="label-dot"></div>
+      <div class="label-line"></div>
+      <div class="label-card"><span class="label-icon">⬡</span><span>Generative Styling Engine</span></div>
+    </div>
+    <div class="tech-label label-3">
+      <div class="label-dot"></div>
+      <div class="label-line"></div>
+      <div class="label-card"><span class="label-icon">◎</span><span>Voice Fashion Assistant</span></div>
+    </div>
+    <div class="tech-label label-4">
+      <div class="label-dot"></div>
+      <div class="label-line"></div>
+      <div class="label-card"><span class="label-icon">⬢</span><span>Body Proportion Analysis</span></div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+</div>
+  <div id="analyze">
+<section class="upload-section" id="analyze-section">
+  <div class="section-header">
+    <div class="section-badge">AI Analysis Engine</div>
+    <h2 class="section-title">Upload &amp; <span class="gradient-text">Analyze</span></h2>
+    <p class="section-sub">Upload your photo and let our AI pipeline — powered by Gemini Vision, Groq LLaMA 3.3 70B, and Hugging Face — generate your personalized style profile.</p>
+  </div>
+
+  <div class="upload-layout">
+    <!-- Left: Upload zone + options -->
+    <div class="upload-zone-wrapper">
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="imageInput" accept="image/*" hidden />
+        <div class="upload-icon-wrap" id="uploadIconWrap">
+          <div class="upload-icon-ring">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <p class="upload-title">Drop your photo here</p>
+          <p class="upload-sub">or <span class="upload-link" id="uploadTrigger">browse files</span></p>
+          <p class="upload-hint">Supports JPG, PNG, WEBP · Max 10MB</p>
+        </div>
+        <div class="upload-preview-wrap" id="previewWrap" style="display:none;">
+          <img id="previewImg" src="" alt="Preview" class="upload-preview-img" />
+          <div class="preview-overlay"><div class="preview-scan-line"></div></div>
+          <button class="remove-img-btn" id="removeImgBtn">✕ Remove</button>
+        </div>
+      </div>
+
+      <div class="upload-options">
+        <div class="option-row">
+          <label class="option-label">Analysis Mode</label>
+          <div class="option-tabs">
+            <button class="opt-tab tab-active" data-mode="full">Full Analysis</button>
+            <button class="opt-tab" data-mode="skin">Skin Tone</button>
+            <button class="opt-tab" data-mode="style">Style Only</button>
+          </div>
+        </div>
+        <div class="option-row">
+          <label class="option-label">AI Model</label>
+          <select class="option-select" id="modelSelect">
+            <option value="groq">Groq LLaMA 3.3 70B</option>
+            <option value="gemini">Google Gemini Vision</option>
+            <option value="huggingface">Hugging Face</option>
+          </select>
+        </div>
+        <div class="option-row">
+          <label class="option-label">Style Preference</label>
+          <select class="option-select" id="stylePreference">
+            <option value="auto">Auto Detect</option>
+            <option value="casual">Casual</option>
+            <option value="formal">Formal / Business</option>
+            <option value="streetwear">Streetwear</option>
+            <option value="luxury">Luxury / High Fashion</option>
+            <option value="minimalist">Minimalist</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-primary analyze-btn" id="analyzeBtn" data-ready="false" style="opacity:.45;cursor:not-allowed;">
+        <span class="btn-glow"></span>
+        <span id="analyzeBtnText">Analyze My Style</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Right: Processing + Results -->
+    <div class="analysis-right">
+      <!-- Idle state -->
+      <div class="idle-panel" id="idlePanel">
+        <div class="idle-orb">
+          <div class="idle-ring ir1"></div>
+          <div class="idle-ring ir2"></div>
+          <div class="idle-core">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5">
+              <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/>
+              <path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+        </div>
+        <p class="idle-text">Upload an image to begin AI analysis</p>
+        <div class="tech-stack-badges">
+          <span class="tech-badge">Groq LLaMA 3.3</span>
+          <span class="tech-badge">Gemini Vision</span>
+          <span class="tech-badge">Hugging Face</span>
+          <span class="tech-badge">FastAPI</span>
+          <span class="tech-badge">OpenCV</span>
+        </div>
+      </div>
+
+      <!-- Processing panel -->
+      <div class="processing-panel" id="processingPanel" style="display:none;">
+        <div class="proc-orb">
+          <div class="proc-ring pr1"></div>
+          <div class="proc-ring pr2"></div>
+          <div class="proc-ring pr3"></div>
+          <div class="proc-core"></div>
+        </div>
+        <p class="proc-title">Analyzing your style...</p>
+        <div class="proc-steps" id="procSteps">
+          <div class="proc-step" id="step1"><span class="step-dot"></span><span>Uploading image to FastAPI server...</span></div>
+          <div class="proc-step" id="step2"><span class="step-dot"></span><span>Gemini Vision: Analyzing face features...</span></div>
+          <div class="proc-step" id="step3"><span class="step-dot"></span><span>Hugging Face: Detecting skin tone via OpenCV...</span></div>
+          <div class="proc-step" id="step4"><span class="step-dot"></span><span>Groq LLaMA 3.3 70B: Generating style profile...</span></div>
+          <div class="proc-step" id="step5"><span class="step-dot"></span><span>Building personalized recommendations...</span></div>
+        </div>
+      </div>
+
+      <!-- Results panel -->
+      <div class="results-panel" id="resultsPanel" style="display:none;">
+        <div class="results-header">
+          <div class="results-badge">
+            <span class="results-badge-dot"></span>Analysis Complete
+          </div>
+          <h3 class="results-title">Your AI Style Report</h3>
+        </div>
+        <div class="results-grid" id="resultsGrid">
+          <!-- Populated dynamically by script.js -->
+        </div>
+        <div class="results-actions">
+          <button class="btn-primary" onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})">
+            <span class="btn-glow"></span>View Full Dashboard
+          </button>
+          <button class="btn-ghost" id="reanalyzeBtn">Analyze Another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+  <div id="face-analysis">
+<section class="face-analysis" id="face-analysis-section">
+  <div class="section-header">
+    <div class="section-badge">HUD Face Analysis</div>
+    <h2 class="section-title">Real-Time <span class="gradient-text">Biometric</span> Styling</h2>
+    <p class="section-sub">Our AI maps 468 facial landmarks to determine your unique features and generate perfectly matched style recommendations.</p>
+  </div>
+
+  <div class="face-analysis-layout">
+    <!-- HUD Scanner -->
+    <div class="hud-scanner">
+      <div class="hud-outer-ring">
+        <div class="hud-ring r1"></div>
+        <div class="hud-ring r2"></div>
+        <div class="hud-ring r3"></div>
+        <div class="hud-ring r4"></div>
+        <div class="corner-bracket tl"></div>
+        <div class="corner-bracket tr"></div>
+        <div class="corner-bracket bl"></div>
+        <div class="corner-bracket br"></div>
+
+        <svg class="face-svg" viewBox="0 0 280 320" fill="none">
+          <!-- Face outline -->
+          <path d="M140 20 C90 20 50 65 50 120 C50 175 80 220 140 240 C200 220 230 175 230 120 C230 65 190 20 140 20Z"
+            stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="6 3" opacity="0.8"/>
+          <!-- Jaw -->
+          <path d="M80 180 Q140 260 200 180" stroke="#3B82F6" stroke-width="1" opacity="0.6"/>
+          <!-- Eyes -->
+          <ellipse cx="105" cy="110" rx="22" ry="12" stroke="#60A5FA" stroke-width="1.5" opacity="0.9"/>
+          <ellipse cx="175" cy="110" rx="22" ry="12" stroke="#60A5FA" stroke-width="1.5" opacity="0.9"/>
+          <circle cx="105" cy="110" r="6" fill="#3B82F6" opacity="0.7"/>
+          <circle cx="175" cy="110" r="6" fill="#3B82F6" opacity="0.7"/>
+          <!-- Eyebrows -->
+          <path d="M83 93 Q105 85 127 93" stroke="#93C5FD" stroke-width="1.5" opacity="0.7"/>
+          <path d="M153 93 Q175 85 197 93" stroke="#93C5FD" stroke-width="1.5" opacity="0.7"/>
+          <!-- Nose -->
+          <path d="M140 115 L132 155 Q140 162 148 155 L140 115" stroke="#60A5FA" stroke-width="1" opacity="0.6"/>
+          <!-- Lips -->
+          <path d="M115 175 Q140 168 165 175" stroke="#93C5FD" stroke-width="1.5" opacity="0.8"/>
+          <path d="M115 175 Q140 192 165 175" stroke="#93C5FD" stroke-width="1.5" opacity="0.8"/>
+          <!-- Landmark dots -->
+          <circle cx="105" cy="110" r="2.5" fill="#60A5FA"/>
+          <circle cx="175" cy="110" r="2.5" fill="#60A5FA"/>
+          <circle cx="140" cy="155" r="2.5" fill="#60A5FA"/>
+          <circle cx="140" cy="175" r="2.5" fill="#60A5FA"/>
+          <circle cx="105" cy="93" r="2" fill="#93C5FD"/>
+          <circle cx="175" cy="93" r="2" fill="#93C5FD"/>
+          <circle cx="80" cy="140" r="2" fill="#3B82F6"/>
+          <circle cx="200" cy="140" r="2" fill="#3B82F6"/>
+          <circle cx="90" cy="180" r="2" fill="#3B82F6"/>
+          <circle cx="190" cy="180" r="2" fill="#3B82F6"/>
+          <circle cx="140" cy="240" r="2" fill="#3B82F6"/>
+          <!-- Measurement lines -->
+          <line x1="50" y1="110" x2="83" y2="110" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.6"/>
+          <line x1="197" y1="110" x2="230" y2="110" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.6"/>
+          <line x1="140" y1="20" x2="140" y2="5" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.6"/>
+          <!-- Animated scan line -->
+          <line class="hud-scan-line" x1="50" y1="120" x2="230" y2="120" stroke="#3B82F6" stroke-width="1.5" opacity="0.9"/>
+        </svg>
+
+        <!-- HUD data overlays -->
+        <div class="hud-data top-left">
+          <span class="hud-label">SCAN ID</span>
+          <span class="hud-value">#SS-2024-7741</span>
+        </div>
+        <div class="hud-data top-right">
+          <span class="hud-label">STATUS</span>
+          <span class="hud-value active-val">ACTIVE</span>
+        </div>
+        <div class="hud-data bottom-left">
+          <span class="hud-label">LANDMARKS</span>
+          <span class="hud-value">468 pts</span>
+        </div>
+        <div class="hud-data bottom-right">
+          <span class="hud-label">ACCURACY</span>
+          <span class="hud-value">99.2%</span>
+        </div>
+
+        <!-- Outer progress arc -->
+        <svg class="progress-arc" viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="185" stroke="#1D4ED8" stroke-width="1" fill="none" stroke-dasharray="4 6" opacity="0.4"/>
+          <circle cx="200" cy="200" r="185" stroke="#3B82F6" stroke-width="2" fill="none"
+            stroke-dasharray="800 1162" stroke-linecap="round" class="arc-progress"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Result Cards -->
+    <div class="result-cards">
+      <!-- Skin Tone -->
+      <div class="result-card">
+        <div class="card-header">
+          <div class="card-icon">◈</div>
+          <div>
+            <div class="card-title">Skin Tone Analysis</div>
+            <div class="card-status-label">Detected</div>
+          </div>
+        </div>
+        <div class="skin-palette">
+          <div class="skin-swatch" style="background:#C68642;"></div>
+          <div class="skin-swatch" style="background:#D4956A;"></div>
+          <div class="skin-swatch swatch-active" style="background:#E8B89A;"></div>
+          <div class="skin-swatch" style="background:#F5CBA7;"></div>
+          <div class="skin-swatch" style="background:#FDDBB4;"></div>
+        </div>
+        <div class="card-result">
+          <span class="result-label">Warm Undertone</span>
+          <span class="result-badge">Medium Beige</span>
+        </div>
+        <div class="card-recommendation">Best colors: Earthy tones, warm reds, olive greens, gold accents</div>
+      </div>
+
+      <!-- Face Shape -->
+      <div class="result-card">
+        <div class="card-header">
+          <div class="card-icon">⬡</div>
+          <div>
+            <div class="card-title">Face Shape</div>
+            <div class="card-status-label">Mapped</div>
+          </div>
+        </div>
+        <div class="face-shape-visual">
+          <svg viewBox="0 0 80 90" fill="none">
+            <path d="M40 8 C22 8 12 28 12 48 C12 68 24 82 40 82 C56 82 68 68 68 48 C68 28 58 8 40 8Z"
+              stroke="#3B82F6" stroke-width="1.5" fill="rgba(59,130,246,0.1)"/>
+            <line x1="40" y1="8" x2="40" y2="82" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+            <line x1="12" y1="48" x2="68" y2="48" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="card-result">
+          <span class="result-label">Oval Face</span>
+          <span class="result-badge">Balanced</span>
+        </div>
+        <div class="card-recommendation">Most styles suit you. Try bold frames, V-necks, structured shoulders.</div>
+      </div>
+
+      <!-- Style Profile -->
+      <div class="result-card">
+        <div class="card-header">
+          <div class="card-icon">◎</div>
+          <div>
+            <div class="card-title">Style Profile</div>
+            <div class="card-status-label">Generated</div>
+          </div>
+        </div>
+        <div class="style-tags">
+          <span class="style-tag">Minimalist</span>
+          <span class="style-tag tag-active">Contemporary</span>
+          <span class="style-tag">Elegant</span>
+          <span class="style-tag">Structured</span>
+        </div>
+        <div class="confidence-bars">
+          <div class="conf-bar">
+            <span>Contemporary</span>
+            <div class="bar-track"><div class="bar-fill" style="width:87%"></div></div>
+            <span>87%</span>
+          </div>
+          <div class="conf-bar">
+            <span>Minimalist</span>
+            <div class="bar-track"><div class="bar-fill" style="width:72%"></div></div>
+            <span>72%</span>
+          </div>
+          <div class="conf-bar">
+            <span>Elegant</span>
+            <div class="bar-track"><div class="bar-fill" style="width:65%"></div></div>
+            <span>65%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Recommendations -->
+      <div class="result-card">
+        <div class="card-header">
+          <div class="card-icon">⬢</div>
+          <div>
+            <div class="card-title">AI Recommendations</div>
+            <div class="card-status-label">Ready</div>
+          </div>
+        </div>
+        <ul class="reco-list">
+          <li><span class="reco-dot"></span>Tailored blazers in warm neutrals</li>
+          <li><span class="reco-dot"></span>High-waist wide-leg trousers</li>
+          <li><span class="reco-dot"></span>Silk blouses with subtle patterns</li>
+          <li><span class="reco-dot"></span>Gold-toned accessories</li>
+        </ul>
+        <button class="card-btn" onclick="document.getElementById('analyze').scrollIntoView({behavior:'smooth'})">
+          Generate Full Wardrobe
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+  <div id="dashboard">
+<section class="dashboard-section" id="dashboard-section">
+  <div class="section-header">
+    <div class="section-badge">AI Dashboard</div>
+    <h2 class="section-title">Your <span class="gradient-text">Style Universe</span></h2>
+    <p class="section-sub">A holographic command center for your complete style identity — outfits, accessories, hairstyles, and curated shopping.</p>
+  </div>
+
+  <div class="dashboard-layout">
+    <!-- Left floating cards -->
+    <div class="dash-col dash-left">
+      <div class="dash-card">
+        <div class="dash-card-header"><span class="dash-icon">◈</span><span>Accessories</span></div>
+        <div class="accessory-grid">
+          <div class="acc-item"><div class="acc-icon">◇</div><span>Gold Watch</span></div>
+          <div class="acc-item"><div class="acc-icon">◈</div><span>Pearl Earrings</span></div>
+          <div class="acc-item"><div class="acc-icon">⬡</div><span>Silk Scarf</span></div>
+          <div class="acc-item"><div class="acc-icon">◎</div><span>Leather Bag</span></div>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header"><span class="dash-icon">⬢</span><span>Color Palette</span></div>
+        <div class="color-palette-row">
+          <div class="cp-swatch" style="background:#2C3E50;" title="Midnight Navy"></div>
+          <div class="cp-swatch" style="background:#C0A882;" title="Warm Sand"></div>
+          <div class="cp-swatch" style="background:#8B7355;" title="Camel"></div>
+          <div class="cp-swatch" style="background:#4A5568;" title="Slate"></div>
+          <div class="cp-swatch" style="background:#D4956A;" title="Terracotta"></div>
+        </div>
+        <p class="palette-label">Your Signature Palette</p>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header"><span class="dash-icon">◎</span><span>Trend Score</span></div>
+        <div class="trend-score">
+          <div class="score-circle">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" stroke="#1E293B" stroke-width="8" fill="none"/>
+              <circle cx="50" cy="50" r="42" stroke="#3B82F6" stroke-width="8" fill="none"
+                stroke-dasharray="220 264" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+            </svg>
+            <span class="score-num">83</span>
+          </div>
+          <div class="score-labels">
+            <div class="score-row"><span>Trend Alignment</span><span class="s-val">91%</span></div>
+            <div class="score-row"><span>Uniqueness</span><span class="s-val">78%</span></div>
+            <div class="score-row"><span>Cohesion</span><span class="s-val">85%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center outfit preview -->
+    <div class="dash-center">
+      <div class="outfit-preview">
+        <div class="outfit-ring or1"></div>
+        <div class="outfit-ring or2"></div>
+        <div class="outfit-card">
+          <div class="outfit-label-top">AI GENERATED LOOK</div>
+          <svg class="outfit-figure" viewBox="0 0 200 380" fill="none">
+            <ellipse cx="100" cy="55" rx="38" ry="42" stroke="#3B82F6" stroke-width="1.5" fill="rgba(59,130,246,0.05)"/>
+            <path d="M62 45 Q100 15 138 45" stroke="#60A5FA" stroke-width="2" fill="none"/>
+            <rect x="88" y="95" width="24" height="18" rx="4" stroke="#3B82F6" stroke-width="1" fill="rgba(59,130,246,0.05)"/>
+            <path d="M88 113 L60 125 L50 230 L150 230 L140 125 L112 113 Z" stroke="#3B82F6" stroke-width="1.5" fill="rgba(59,130,246,0.08)"/>
+            <path d="M88 113 L80 145 L100 135" stroke="#60A5FA" stroke-width="1" fill="none"/>
+            <path d="M112 113 L120 145 L100 135" stroke="#60A5FA" stroke-width="1" fill="none"/>
+            <path d="M50 125 L30 220 L42 222" stroke="#3B82F6" stroke-width="1.5" fill="none"/>
+            <path d="M150 125 L170 220 L158 222" stroke="#3B82F6" stroke-width="1.5" fill="none"/>
+            <path d="M50 230 L55 370 L95 370 L100 280 L105 370 L145 370 L150 230 Z" stroke="#3B82F6" stroke-width="1.5" fill="rgba(59,130,246,0.06)"/>
+            <rect x="50" y="228" width="100" height="8" rx="2" stroke="#60A5FA" stroke-width="1" fill="rgba(96,165,250,0.15)"/>
+            <ellipse cx="72" cy="374" rx="18" ry="6" stroke="#3B82F6" stroke-width="1" fill="rgba(59,130,246,0.1)"/>
+            <ellipse cx="128" cy="374" rx="18" ry="6" stroke="#3B82F6" stroke-width="1" fill="rgba(59,130,246,0.1)"/>
+            <circle cx="88" cy="50" r="3" fill="#60A5FA" opacity="0.8"/>
+            <circle cx="112" cy="50" r="3" fill="#60A5FA" opacity="0.8"/>
+            <path d="M92 65 Q100 70 108 65" stroke="#60A5FA" stroke-width="1" opacity="0.7"/>
+          </svg>
+          <div class="outfit-info">
+            <span class="outfit-name">Contemporary Chic</span>
+            <span class="outfit-match">94% Match</span>
+          </div>
+        </div>
+        <div class="outfit-actions">
+          <button class="outfit-btn">Save Look</button>
+          <button class="outfit-btn primary-btn">Shop Now</button>
+          <button class="outfit-btn" id="regenerateBtn">Regenerate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right floating cards -->
+    <div class="dash-col dash-right">
+      <div class="dash-card">
+        <div class="dash-card-header"><span class="dash-icon">◇</span><span>Hairstyles</span></div>
+        <div class="hair-options">
+          <div class="hair-item hair-active">
+            <svg viewBox="0 0 50 60" fill="none">
+              <ellipse cx="25" cy="38" rx="14" ry="16" stroke="#3B82F6" stroke-width="1.2" fill="rgba(59,130,246,0.1)"/>
+              <path d="M11 32 Q25 8 39 32" stroke="#60A5FA" stroke-width="1.5" fill="none"/>
+            </svg>
+            <span>Sleek Bob</span>
+          </div>
+          <div class="hair-item">
+            <svg viewBox="0 0 50 60" fill="none">
+              <ellipse cx="25" cy="38" rx="14" ry="16" stroke="#3B82F6" stroke-width="1.2" fill="rgba(59,130,246,0.1)"/>
+              <path d="M11 32 Q15 5 25 10 Q35 5 39 32" stroke="#60A5FA" stroke-width="1.5" fill="none"/>
+              <path d="M11 32 Q8 20 12 15" stroke="#60A5FA" stroke-width="1" fill="none"/>
+            </svg>
+            <span>Wavy Long</span>
+          </div>
+          <div class="hair-item">
+            <svg viewBox="0 0 50 60" fill="none">
+              <ellipse cx="25" cy="38" rx="14" ry="16" stroke="#3B82F6" stroke-width="1.2" fill="rgba(59,130,246,0.1)"/>
+              <path d="M11 32 Q25 12 39 32" stroke="#60A5FA" stroke-width="1.5" fill="none"/>
+              <line x1="25" y1="12" x2="25" y2="5" stroke="#60A5FA" stroke-width="1.5"/>
+            </svg>
+            <span>Updo Bun</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header"><span class="dash-icon">◈</span><span>Curated Shopping</span></div>
+        <div class="shopping-links">
+          <a class="shop-item" href="https://www.myntra.com/blazers" target="_blank" rel="noopener">
+            <div class="shop-thumb" style="background:linear-gradient(135deg,#1e3a5f,#2563eb22)">
+              <span>👔</span>
+            </div>
+            <div class="shop-info">
+              <span class="shop-name">Tailored Blazer</span>
+              <span class="shop-price">₹2,499</span>
+            </div>
+            <span class="shop-arrow">→</span>
+          </a>
+          <a class="shop-item" href="https://www.myntra.com/trousers" target="_blank" rel="noopener">
+            <div class="shop-thumb" style="background:linear-gradient(135deg,#1e3a5f,#2563eb22)">
+              <span>👗</span>
+            </div>
+            <div class="shop-info">
+              <span class="shop-name">Wide-Leg Trousers</span>
+              <span class="shop-price">₹1,599</span>
+            </div>
+            <span class="shop-arrow">→</span>
+          </a>
+          <a class="shop-item" href="https://www.myntra.com/handbags" target="_blank" rel="noopener">
+            <div class="shop-thumb" style="background:linear-gradient(135deg,#1e3a5f,#2563eb22)">
+              <span>👜</span>
+            </div>
+            <div class="shop-info">
+              <span class="shop-name">Structured Tote</span>
+              <span class="shop-price">₹3,199</span>
+            </div>
+            <span class="shop-arrow">→</span>
+          </a>
+          <a class="shop-item" href="https://www.ajio.com/s/formal-shirts" target="_blank" rel="noopener">
+            <div class="shop-thumb" style="background:linear-gradient(135deg,#1e3a5f,#2563eb22)">
+              <span>👕</span>
+            </div>
+            <div class="shop-info">
+              <span class="shop-name">Oxford Shirt</span>
+              <span class="shop-price">₹999</span>
+            </div>
+            <span class="shop-arrow">→</span>
+          </a>
+          <a class="shop-item" href="https://www.flipkart.com/mens-footwear/loafers~shoes-type/pr?sid=osp,cil,1cu" target="_blank" rel="noopener">
+            <div class="shop-thumb" style="background:linear-gradient(135deg,#1e3a5f,#2563eb22)">
+              <span>👞</span>
+            </div>
+            <div class="shop-info">
+              <span class="shop-name">Leather Loafers</span>
+              <span class="shop-price">₹1,899</span>
+            </div>
+            <span class="shop-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header"><span class="dash-icon">⬡</span><span>Season Forecast</span></div>
+        <div class="season-grid">
+          <div class="season-item active-season">
+            <span class="season-icon">❄</span>
+            <span>Winter 2025</span>
+            <span class="season-match">92%</span>
+          </div>
+          <div class="season-item">
+            <span class="season-icon">🌸</span>
+            <span>Spring 2025</span>
+            <span class="season-match">78%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+  <div id="features">
+<section class="features-section" id="features-section">
+  <div class="section-header">
+    <div class="section-badge">Technology Stack</div>
+    <h2 class="section-title">Powered by <span class="gradient-text">Cutting-Edge AI</span></h2>
+    <p class="section-sub">StyleSense integrates the world's most advanced AI models and computer vision tools into one seamless fashion experience.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card fc-large">
+      <div class="fc-glow"></div>
+      <div class="fc-icon-wrap">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h3 class="fc-title">Groq LLaMA 3.3 70B</h3>
+      <p class="fc-desc">Ultra-fast inference engine generating detailed, personalized fashion recommendations in under 500ms. Understands context, trends, and personal style nuances.</p>
+      <div class="fc-tags"><span>NLP</span><span>Fashion LLM</span><span>70B Params</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="fc-glow"></div>
+      <div class="fc-icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+        </svg>
+      </div>
+      <h3 class="fc-title">Google Gemini Vision</h3>
+      <p class="fc-desc">Multimodal AI that understands your image — detecting face structure, clothing, colors, and overall aesthetic with remarkable precision.</p>
+      <div class="fc-tags"><span>Vision AI</span><span>Multimodal</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="fc-glow"></div>
+      <div class="fc-icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+        </svg>
+      </div>
+      <h3 class="fc-title">Hugging Face Models</h3>
+      <p class="fc-desc">Specialized skin tone classification and body proportion analysis models fine-tuned on diverse fashion datasets for inclusive recommendations.</p>
+      <div class="fc-tags"><span>Skin Detection</span><span>Classification</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="fc-glow"></div>
+      <div class="fc-icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5">
+          <path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/>
+          <path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+          <path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/>
+          <path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/>
+          <path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/>
+          <path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/>
+          <path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/>
+          <path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/>
+        </svg>
+      </div>
+      <h3 class="fc-title">FastAPI Backend</h3>
+      <p class="fc-desc">High-performance Python REST API handling image uploads, AI orchestration, and real-time response streaming with async processing.</p>
+      <div class="fc-tags"><span>REST API</span><span>Python</span><span>Async</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="fc-glow"></div>
+      <div class="fc-icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+        </svg>
+      </div>
+      <h3 class="fc-title">OpenCV Processing</h3>
+      <p class="fc-desc">Real-time face detection and skin region extraction using computer vision algorithms to accurately sample and classify skin tone from uploaded images.</p>
+      <div class="fc-tags"><span>Computer Vision</span><span>Face Detection</span></div>
+    </div>
+
+    <div class="feature-card fc-large">
+      <div class="fc-glow"></div>
+      <div class="fc-icon-wrap">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5">
+          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+        </svg>
+      </div>
+      <h3 class="fc-title">Voice Fashion Assistant</h3>
+      <p class="fc-desc">Conversational AI interface powered by Groq's ultra-low latency API. Ask questions, get style advice, and explore outfit options through natural voice and text interaction.</p>
+      <div class="fc-tags"><span>Voice AI</span><span>Conversational</span><span>Real-time</span></div>
+    </div>
+  </div>
+
+  <!-- Tech pipeline visual -->
+  <div class="pipeline-visual">
+    <div class="pipeline-title">AI Processing Pipeline</div>
+    <div class="pipeline-steps">
+      <div class="pipe-step">
+        <div class="pipe-icon">📸</div>
+        <div class="pipe-label">Image Upload</div>
+        <div class="pipe-sub">REST API</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-icon">👁</div>
+        <div class="pipe-label">Gemini Vision</div>
+        <div class="pipe-sub">Face Analysis</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-icon">🎨</div>
+        <div class="pipe-label">HuggingFace</div>
+        <div class="pipe-sub">Skin Tone</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-icon">🧠</div>
+        <div class="pipe-label">Groq LLaMA</div>
+        <div class="pipe-sub">Style Gen</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-icon">✨</div>
+        <div class="pipe-label">Style Report</div>
+        <div class="pipe-sub">Personalized</div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+  <div id="chatbot">
+<section class="chatbot-section" id="chatbot-section">
+  <div class="section-header">
+    <div class="section-badge">Voice AI Assistant</div>
+    <h2 class="section-title">Meet Your <span class="gradient-text">Style Oracle</span></h2>
+    <p class="section-sub">Ask anything about fashion, get instant AI-powered advice from Groq LLaMA 3.3 70B — your personal stylist, available 24/7.</p>
+  </div>
+
+  <div class="chatbot-layout">
+    <!-- Holographic Orb -->
+    <div class="orb-container">
+      <div class="orb-pulse op1"></div>
+      <div class="orb-pulse op2"></div>
+      <div class="orb-pulse op3"></div>
+      <div class="orb-ring or1"></div>
+      <div class="orb-ring or2"></div>
+      <div class="orb-ring or3"></div>
+      <div class="orb-core" id="orbCore">
+        <div class="orb-inner-glow"></div>
+        <div class="orb-wave w1"></div>
+        <div class="orb-wave w2"></div>
+        <div class="orb-wave w3"></div>
+        <svg class="orb-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5">
+          <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" opacity="0.3"/>
+          <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/>
+        </svg>
+      </div>
+      <div class="orb-label">StyleSense AI</div>
+      <div class="orb-status">
+        <span class="orb-dot"></span>
+        <span id="orbStatusText">Ready to assist</span>
+      </div>
+    </div>
+
+    <!-- Chat Interface -->
+    <div class="chat-interface">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar">
+            <div class="chat-avatar-orb"></div>
+          </div>
+          <div>
+            <div class="chat-name">StyleSense AI</div>
+            <div class="chat-model">Groq LLaMA 3.3 70B · <span class="chat-online">Online</span></div>
+          </div>
+        </div>
+        <div class="chat-actions">
+          <button class="chat-action-btn" id="clearChatBtn" title="Clear chat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
+              <path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <!-- Welcome message -->
+        <div class="chat-msg ai-msg">
+          <div class="msg-avatar"><div class="msg-avatar-orb"></div></div>
+          <div class="msg-bubble">
+            <p>Hello! I'm your StyleSense AI assistant, powered by Groq LLaMA 3.3 70B. I can help you with:</p>
+            <ul class="msg-list">
+              <li>Personalized outfit recommendations</li>
+              <li>Color palette advice for your skin tone</li>
+              <li>Trend analysis and style tips</li>
+              <li>Occasion-specific styling</li>
+            </ul>
+            <p>What would you like to explore today?</p>
+          </div>
+        </div>
+
+        <!-- Quick suggestion chips -->
+        <div class="suggestion-chips" id="suggestionChips">
+          <button class="chip" data-msg="What colors suit a warm skin tone?">Warm skin tone colors</button>
+          <button class="chip" data-msg="Suggest a business casual outfit for an oval face">Business casual look</button>
+          <button class="chip" data-msg="What are the top fashion trends for 2025?">2025 Trends</button>
+          <button class="chip" data-msg="How do I build a minimalist wardrobe?">Minimalist wardrobe</button>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <div class="chat-input-wrap">
+          <button class="voice-btn" id="voiceBtn" title="Voice input">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a3 3 0 00-3 3v7a3 3 0 006 0V5a3 3 0 00-3-3z"/>
+              <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v3M8 22h8"/>
+            </svg>
+          </button>
+          <textarea class="chat-input" id="chatInput" placeholder="Ask about your style, outfits, trends..." rows="1"></textarea>
+          <button class="send-btn" id="sendBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+        <div class="chat-footer-note">Powered by <span>Groq LLaMA 3.3 70B</span> · Responses may take a moment</div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-orb small"></div>
+        <span class="logo-text">Style<span class="logo-accent">Sense</span></span>
+        <p>Generative AI Fashion Intelligence</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#analyze">Style Scan</a>
+          <a href="#face-analysis">Face Analysis</a>
+          <a href="#dashboard">Dashboard</a>
+        </div>
+        <div class="footer-col">
+          <h4>Technology</h4>
+          <a href="#">Groq LLaMA 3.3</a>
+          <a href="#">Gemini Vision</a>
+          <a href="#">Hugging Face</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Privacy</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 StyleSense. All rights reserved.</span>
+      <span>Powered by Groq · Gemini · Hugging Face · FastAPI</span>
+    </div>
+  </footer>
+
+  <!-- Floating chatbot orb trigger -->
+  <div class="chatbot-fab" id="chatbotFab" onclick="scrollToSection('chatbot')">
+    <div class="fab-pulse"></div>
+    <div class="fab-pulse p2"></div>
+    <div class="fab-core">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

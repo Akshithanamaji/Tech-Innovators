@@ -1,0 +1,100 @@
+<section class="chatbot-section" id="chatbot-section">
+  <div class="section-header">
+    <div class="section-badge">Voice AI Assistant</div>
+    <h2 class="section-title">Meet Your <span class="gradient-text">Style Oracle</span></h2>
+    <p class="section-sub">Ask anything about fashion, get instant AI-powered advice from Groq LLaMA 3.3 70B — your personal stylist, available 24/7.</p>
+  </div>
+
+  <div class="chatbot-layout">
+    <!-- Holographic Orb -->
+    <div class="orb-container">
+      <div class="orb-pulse op1"></div>
+      <div class="orb-pulse op2"></div>
+      <div class="orb-pulse op3"></div>
+      <div class="orb-ring or1"></div>
+      <div class="orb-ring or2"></div>
+      <div class="orb-ring or3"></div>
+      <div class="orb-core" id="orbCore">
+        <div class="orb-inner-glow"></div>
+        <div class="orb-wave w1"></div>
+        <div class="orb-wave w2"></div>
+        <div class="orb-wave w3"></div>
+        <svg class="orb-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5">
+          <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" opacity="0.3"/>
+          <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/>
+        </svg>
+      </div>
+      <div class="orb-label">StyleSense AI</div>
+      <div class="orb-status">
+        <span class="orb-dot"></span>
+        <span id="orbStatusText">Ready to assist</span>
+      </div>
+    </div>
+
+    <!-- Chat Interface -->
+    <div class="chat-interface">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar">
+            <div class="chat-avatar-orb"></div>
+          </div>
+          <div>
+            <div class="chat-name">StyleSense AI</div>
+            <div class="chat-model">Groq LLaMA 3.3 70B · <span class="chat-online">Online</span></div>
+          </div>
+        </div>
+        <div class="chat-actions">
+          <button class="chat-action-btn" id="clearChatBtn" title="Clear chat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
+              <path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <!-- Welcome message -->
+        <div class="chat-msg ai-msg">
+          <div class="msg-avatar"><div class="msg-avatar-orb"></div></div>
+          <div class="msg-bubble">
+            <p>Hello! I'm your StyleSense AI assistant, powered by Groq LLaMA 3.3 70B. I can help you with:</p>
+            <ul class="msg-list">
+              <li>Personalized outfit recommendations</li>
+              <li>Color palette advice for your skin tone</li>
+              <li>Trend analysis and style tips</li>
+              <li>Occasion-specific styling</li>
+            </ul>
+            <p>What would you like to explore today?</p>
+          </div>
+        </div>
+
+        <!-- Quick suggestion chips -->
+        <div class="suggestion-chips" id="suggestionChips">
+          <button class="chip" data-msg="What colors suit a warm skin tone?">Warm skin tone colors</button>
+          <button class="chip" data-msg="Suggest a business casual outfit for an oval face">Business casual look</button>
+          <button class="chip" data-msg="What are the top fashion trends for 2025?">2025 Trends</button>
+          <button class="chip" data-msg="How do I build a minimalist wardrobe?">Minimalist wardrobe</button>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <div class="chat-input-wrap">
+          <button class="voice-btn" id="voiceBtn" title="Voice input">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a3 3 0 00-3 3v7a3 3 0 006 0V5a3 3 0 00-3-3z"/>
+              <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v3M8 22h8"/>
+            </svg>
+          </button>
+          <textarea class="chat-input" id="chatInput" placeholder="Ask about your style, outfits, trends..." rows="1"></textarea>
+          <button class="send-btn" id="sendBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+        <div class="chat-footer-note">Powered by <span>Groq LLaMA 3.3 70B</span> · Responses may take a moment</div>
+      </div>
+    </div>
+  </div>
+</section>

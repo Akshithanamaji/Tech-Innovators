@@ -1,0 +1,191 @@
+<section class="face-analysis" id="face-analysis-section">
+  <div class="section-header">
+    <div class="section-badge">HUD Face Analysis</div>
+    <h2 class="section-title">Real-Time <span class="gradient-text">Biometric</span> Styling</h2>
+    <p class="section-sub">Our AI maps 468 facial landmarks to determine your unique features and generate perfectly matched style recommendations.</p>
+  </div>
+
+  <div class="face-analysis-layout">
+    <!-- HUD Scanner -->
+    <div class="hud-scanner">
+      <div class="hud-outer-ring">
+        <div class="hud-ring r1"></div>
+        <div class="hud-ring r2"></div>
+        <div class="hud-ring r3"></div>
+        <div class="hud-ring r4"></div>
+        <div class="corner-bracket tl"></div>
+        <div class="corner-bracket tr"></div>
+        <div class="corner-bracket bl"></div>
+        <div class="corner-bracket br"></div>
+
+        <svg class="face-svg" viewBox="0 0 280 320" fill="none">
+          <!-- Face outline -->
+          <path d="M140 20 C90 20 50 65 50 120 C50 175 80 220 140 240 C200 220 230 175 230 120 C230 65 190 20 140 20Z"
+            stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="6 3" opacity="0.8"/>
+          <!-- Jaw -->
+          <path d="M80 180 Q140 260 200 180" stroke="#3B82F6" stroke-width="1" opacity="0.6"/>
+          <!-- Eyes -->
+          <ellipse cx="105" cy="110" rx="22" ry="12" stroke="#60A5FA" stroke-width="1.5" opacity="0.9"/>
+          <ellipse cx="175" cy="110" rx="22" ry="12" stroke="#60A5FA" stroke-width="1.5" opacity="0.9"/>
+          <circle cx="105" cy="110" r="6" fill="#3B82F6" opacity="0.7"/>
+          <circle cx="175" cy="110" r="6" fill="#3B82F6" opacity="0.7"/>
+          <!-- Eyebrows -->
+          <path d="M83 93 Q105 85 127 93" stroke="#93C5FD" stroke-width="1.5" opacity="0.7"/>
+          <path d="M153 93 Q175 85 197 93" stroke="#93C5FD" stroke-width="1.5" opacity="0.7"/>
+          <!-- Nose -->
+          <path d="M140 115 L132 155 Q140 162 148 155 L140 115" stroke="#60A5FA" stroke-width="1" opacity="0.6"/>
+          <!-- Lips -->
+          <path d="M115 175 Q140 168 165 175" stroke="#93C5FD" stroke-width="1.5" opacity="0.8"/>
+          <path d="M115 175 Q140 192 165 175" stroke="#93C5FD" stroke-width="1.5" opacity="0.8"/>
+          <!-- Landmark dots -->
+          <circle cx="105" cy="110" r="2.5" fill="#60A5FA"/>
+          <circle cx="175" cy="110" r="2.5" fill="#60A5FA"/>
+          <circle cx="140" cy="155" r="2.5" fill="#60A5FA"/>
+          <circle cx="140" cy="175" r="2.5" fill="#60A5FA"/>
+          <circle cx="105" cy="93" r="2" fill="#93C5FD"/>
+          <circle cx="175" cy="93" r="2" fill="#93C5FD"/>
+          <circle cx="80" cy="140" r="2" fill="#3B82F6"/>
+          <circle cx="200" cy="140" r="2" fill="#3B82F6"/>
+          <circle cx="90" cy="180" r="2" fill="#3B82F6"/>
+          <circle cx="190" cy="180" r="2" fill="#3B82F6"/>
+          <circle cx="140" cy="240" r="2" fill="#3B82F6"/>
+          <!-- Measurement lines -->
+          <line x1="50" y1="110" x2="83" y2="110" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.6"/>
+          <line x1="197" y1="110" x2="230" y2="110" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.6"/>
+          <line x1="140" y1="20" x2="140" y2="5" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.6"/>
+          <!-- Animated scan line -->
+          <line class="hud-scan-line" x1="50" y1="120" x2="230" y2="120" stroke="#3B82F6" stroke-width="1.5" opacity="0.9"/>
+        </svg>
+
+        <!-- HUD data overlays -->
+        <div class="hud-data top-left">
+          <span class="hud-label">SCAN ID</span>
+          <span class="hud-value">#SS-2024-7741</span>
+        </div>
+        <div class="hud-data top-right">
+          <span class="hud-label">STATUS</span>
+          <span class="hud-value active-val">ACTIVE</span>
+        </div>
+        <div class="hud-data bottom-left">
+          <span class="hud-label">LANDMARKS</span>
+          <span class="hud-value">468 pts</span>
+        </div>
+        <div class="hud-data bottom-right">
+          <span class="hud-label">ACCURACY</span>
+          <span class="hud-value">99.2%</span>
+        </div>
+
+        <!-- Outer progress arc -->
+        <svg class="progress-arc" viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="185" stroke="#1D4ED8" stroke-width="1" fill="none" stroke-dasharray="4 6" opacity="0.4"/>
+          <circle cx="200" cy="200" r="185" stroke="#3B82F6" stroke-width="2" fill="none"
+            stroke-dasharray="800 1162" stroke-linecap="round" class="arc-progress"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Result Cards -->
+    <div class="result-cards">
+      <!-- Skin Tone -->
+      <div class="result-card">
+        <div class="card-header">
+          <div class="card-icon">◈</div>
+          <div>
+            <div class="card-title">Skin Tone Analysis</div>
+            <div class="card-status-label">Detected</div>
+          </div>
+        </div>
+        <div class="skin-palette">
+          <div class="skin-swatch" style="background:#C68642;"></div>
+          <div class="skin-swatch" style="background:#D4956A;"></div>
+          <div class="skin-swatch swatch-active" style="background:#E8B89A;"></div>
+          <div class="skin-swatch" style="background:#F5CBA7;"></div>
+          <div class="skin-swatch" style="background:#FDDBB4;"></div>
+        </div>
+        <div class="card-result">
+          <span class="result-label">Warm Undertone</span>
+          <span class="result-badge">Medium Beige</span>
+        </div>
+        <div class="card-recommendation">Best colors: Earthy tones, warm reds, olive greens, gold accents</div>
+      </div>
+
+      <!-- Face Shape -->
+      <div class="result-card">
+        <div class="card-header">
+          <div class="card-icon">⬡</div>
+          <div>
+            <div class="card-title">Face Shape</div>
+            <div class="card-status-label">Mapped</div>
+          </div>
+        </div>
+        <div class="face-shape-visual">
+          <svg viewBox="0 0 80 90" fill="none">
+            <path d="M40 8 C22 8 12 28 12 48 C12 68 24 82 40 82 C56 82 68 68 68 48 C68 28 58 8 40 8Z"
+              stroke="#3B82F6" stroke-width="1.5" fill="rgba(59,130,246,0.1)"/>
+            <line x1="40" y1="8" x2="40" y2="82" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+            <line x1="12" y1="48" x2="68" y2="48" stroke="#1D4ED8" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="card-result">
+          <span class="result-label">Oval Face</span>
+          <span class="result-badge">Balanced</span>
+        </div>
+        <div class="card-recommendation">Most styles suit you. Try bold frames, V-necks, structured shoulders.</div>
+      </div>
+
+      <!-- Style Profile -->
+      <div class="result-card">
+        <div class="card-header">
+          <div class="card-icon">◎</div>
+          <div>
+            <div class="card-title">Style Profile</div>
+            <div class="card-status-label">Generated</div>
+          </div>
+        </div>
+        <div class="style-tags">
+          <span class="style-tag">Minimalist</span>
+          <span class="style-tag tag-active">Contemporary</span>
+          <span class="style-tag">Elegant</span>
+          <span class="style-tag">Structured</span>
+        </div>
+        <div class="confidence-bars">
+          <div class="conf-bar">
+            <span>Contemporary</span>
+            <div class="bar-track"><div class="bar-fill" style="width:87%"></div></div>
+            <span>87%</span>
+          </div>
+          <div class="conf-bar">
+            <span>Minimalist</span>
+            <div class="bar-track"><div class="bar-fill" style="width:72%"></div></div>
+            <span>72%</span>
+          </div>
+          <div class="conf-bar">
+            <span>Elegant</span>
+            <div class="bar-track"><div class="bar-fill" style="width:65%"></div></div>
+            <span>65%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Recommendations -->
+      <div class="result-card">
+        <div class="card-header">
+          <div class="card-icon">⬢</div>
+          <div>
+            <div class="card-title">AI Recommendations</div>
+            <div class="card-status-label">Ready</div>
+          </div>
+        </div>
+        <ul class="reco-list">
+          <li><span class="reco-dot"></span>Tailored blazers in warm neutrals</li>
+          <li><span class="reco-dot"></span>High-waist wide-leg trousers</li>
+          <li><span class="reco-dot"></span>Silk blouses with subtle patterns</li>
+          <li><span class="reco-dot"></span>Gold-toned accessories</li>
+        </ul>
+        <button class="card-btn" onclick="document.getElementById('analyze').scrollIntoView({behavior:'smooth'})">
+          Generate Full Wardrobe
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
