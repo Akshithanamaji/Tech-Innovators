@@ -8,6 +8,7 @@ import io
 import base64
 import tempfile
 import threading
+import subprocess
 from dotenv import load_dotenv
 load_dotenv()
 from fastapi import FastAPI, File, UploadFile, HTTPException
@@ -257,21 +258,36 @@ async def face_analysis(file: UploadFile = File(...)):
         "landmarks_detected": True,
     }
 
-# TTS lock to prevent concurrent pyttsx3 engine conflicts
-_tts_lock = threading.Lock()
-
 def synthesize_speech(text: str, rate: int, volume: float) -> str:
-    """Run pyttsx3 in a thread-safe way and return path to temp WAV file."""
+    """Generate speech audio using macOS 'say' command, fallback to pyttsx3."""
     tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
     tmp_path = tmp.name
     tmp.close()
-    with _tts_lock:
-        engine = pyttsx3.init()
-        engine.setProperty("rate", rate)
-        engine.setProperty("volume", volume)
-        engine.save_to_file(text, tmp_path)
-        engine.runAndWait()
-        engine.stop()
+    # macOS 'say' with WAV output — reliable on macOS
+    try:
+        # rate: say uses words-per-minute; default ~175 wpm maps to -r flag
+        result = subprocess.run(
+            ["say", "-o", tmp_path, "--data-format=LEF32@22050", "-r", str(rate), text],
+            capture_output=True, timeout=30
+        )
+        if result.returncode == 0:
+            return tmp_path
+    except Exception:
+        pass
+    # Fallback: pyttsx3
+    if PYTTSX3_AVAILABLE:
+        import threading as _t
+        lock = getattr(synthesize_speech, "_lock", None)
+        if lock is None:
+            synthesize_speech._lock = _t.Lock()
+            lock = synthesize_speech._lock
+        with lock:
+            engine = pyttsx3.init()
+            engine.setProperty("rate", rate)
+            engine.setProperty("volume", volume)
+            engine.save_to_file(text, tmp_path)
+            engine.runAndWait()
+            engine.stop()
     return tmp_path
 
 def get_fallback_response(msg: str) -> str:
@@ -313,4 +329,4 @@ async def text_to_speech(request: TTSRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
