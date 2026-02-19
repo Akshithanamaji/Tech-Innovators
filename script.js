@@ -432,6 +432,40 @@ function initChatbot() {
 
   const BACKEND = 'http://localhost:8000';
 
+  /* TTS state */
+  let ttsEnabled = true;
+  let currentAudio = null;
+  const ttsToggleBtn = document.getElementById('ttsToggleBtn');
+  if (ttsToggleBtn) {
+    ttsToggleBtn.addEventListener('click', () => {
+      ttsEnabled = !ttsEnabled;
+      if (!ttsEnabled && currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+      }
+      ttsToggleBtn.title = ttsEnabled ? 'Mute voice' : 'Unmute voice';
+      ttsToggleBtn.classList.toggle('tts-muted', !ttsEnabled);
+    });
+  }
+
+  async function speakText(text) {
+    if (!ttsEnabled) return;
+    try {
+      const res = await fetch(`${BACKEND}/tts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
+      if (!res.ok) return;
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      if (currentAudio) { currentAudio.pause(); URL.revokeObjectURL(currentAudio.src); }
+      currentAudio = new Audio(url);
+      currentAudio.onended = () => { URL.revokeObjectURL(url); currentAudio = null; };
+      currentAudio.play();
+    } catch { /* TTS is non-critical, silently ignore */ }
+  }
+
   /* Send on Enter (Shift+Enter = newline) */
   chatInput.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -503,10 +537,14 @@ function initChatbot() {
       removeTyping(typingId);
       if (!res.ok) throw new Error('API error');
       const data = await res.json();
-      appendMessage('ai', data.response || data.message || 'No response received.');
+      const aiText = data.response || data.message || 'No response received.';
+      appendMessage('ai', aiText);
+      speakText(aiText);
     } catch {
       removeTyping(typingId);
-      appendMessage('ai', getMockResponse(text));
+      const fallback = getMockResponse(text);
+      appendMessage('ai', fallback);
+      speakText(fallback);
     }
 
     if (sendBtn) sendBtn.disabled = false;

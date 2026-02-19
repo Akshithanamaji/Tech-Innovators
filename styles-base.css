@@ -376,6 +376,7 @@ body { background: var(--bg); color: var(--tx); font-family: var(--fb); overflow
 .voice-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: transparent; color: var(--tx3); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; flex-shrink: 0; }
 .voice-btn:hover, .voice-btn.listening { border-color: var(--blue-s); color: var(--blue-s); background: var(--glass-l); }
 .voice-btn.listening { animation: blink .8s infinite; }
+.voice-btn.tts-muted { color: var(--tx3); opacity: 0.45; border-color: var(--border); }
 .chat-input { flex: 1; background: transparent; border: none; color: var(--tx); font-family: var(--fb); font-size: 14px; resize: none; outline: none; max-height: 120px; line-height: 1.5; }
 .chat-input::placeholder { color: var(--tx3); }
 .send-btn { width: 36px; height: 36px; border-radius: 50%; border: none; background: linear-gradient(135deg,var(--blue),var(--blue-l)); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; flex-shrink: 0; }

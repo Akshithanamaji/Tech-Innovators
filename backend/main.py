@@ -6,10 +6,13 @@ Endpoints: /analyze (image), /chat (text), /face-analysis
 import os
 import io
 import base64
+import tempfile
+import threading
 from dotenv import load_dotenv
 load_dotenv()
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Optional
 
@@ -34,6 +37,12 @@ try:
 except Exception:
     CV2_AVAILABLE = False
 
+try:
+    import pyttsx3
+    PYTTSX3_AVAILABLE = True
+except Exception:
+    PYTTSX3_AVAILABLE = False
+
 app = FastAPI(title="StyleSense API", version="1.0.0")
 
 app.add_middleware(
@@ -52,6 +61,11 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: str
     model: str
+
+class TTSRequest(BaseModel):
+    text: str
+    rate: Optional[int] = 175
+    volume: Optional[float] = 1.0
 
 class AnalysisResult(BaseModel):
     skin_tone: str
@@ -243,6 +257,23 @@ async def face_analysis(file: UploadFile = File(...)):
         "landmarks_detected": True,
     }
 
+# TTS lock to prevent concurrent pyttsx3 engine conflicts
+_tts_lock = threading.Lock()
+
+def synthesize_speech(text: str, rate: int, volume: float) -> str:
+    """Run pyttsx3 in a thread-safe way and return path to temp WAV file."""
+    tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
+    tmp_path = tmp.name
+    tmp.close()
+    with _tts_lock:
+        engine = pyttsx3.init()
+        engine.setProperty("rate", rate)
+        engine.setProperty("volume", volume)
+        engine.save_to_file(text, tmp_path)
+        engine.runAndWait()
+        engine.stop()
+    return tmp_path
+
 def get_fallback_response(msg: str) -> str:
     msg = msg.lower()
     if any(w in msg for w in ["skin", "tone", "complexion"]):
@@ -254,6 +285,31 @@ def get_fallback_response(msg: str) -> str:
     if any(w in msg for w in ["color", "palette", "colours"]):
         return "Your Autumn palette includes burnt orange, forest green, camel, chocolate brown, and deep burgundy. These warm, rich tones will elevate any outfit."
     return "I'm StyleSense AI, your personal fashion intelligence assistant. Ask me about outfit recommendations, color analysis, face shape styling, or current trends!"
+
+@app.post("/tts")
+async def text_to_speech(request: TTSRequest):
+    """Convert text to speech using pyttsx3 and return audio as WAV."""
+    if not PYTTSX3_AVAILABLE:
+        raise HTTPException(status_code=503, detail="pyttsx3 not available")
+    text = request.text.strip()
+    if not text:
+        raise HTTPException(status_code=400, detail="Text cannot be empty")
+    if len(text) > 2000:
+        text = text[:2000]
+    try:
+        import asyncio
+        loop = asyncio.get_event_loop()
+        tmp_path = await loop.run_in_executor(
+            None, synthesize_speech, text, request.rate, request.volume
+        )
+        return FileResponse(
+            tmp_path,
+            media_type="audio/wav",
+            filename="tts.wav",
+            background=None,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"TTS failed: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn
